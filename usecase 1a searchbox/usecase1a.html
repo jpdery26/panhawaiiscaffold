@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+        
+        <script src="js/CoveoJsSearch.Searchbox.js"></script>
+        <link rel="stylesheet" href="css/CoveoFullSearchNewDesign.css" />
+
+        <script>
+            Coveo.context = {
+                organization: 'paloaltonetworkssandbox',
+                token: '2115efeb-7b1c-4fde-a12d-07caa11f522c', //"Live Search Integration",
+                searchHub: 'LiveSearch'
+            }
+
+            document.addEventListener('DOMContentLoaded', function(){
+                Coveo.SearchEndpoint.configureCloudEndpoint(Coveo.context.organization, Coveo.context.token);
+
+                var root = Coveo.$$(document).find("#searchbox");
+                Coveo.initSearchbox(root, ".", {
+                    Searchbox : {
+                        placeholder : "What are you looking for?"
+                    },
+                    Analytics : {
+                        searchHub : Coveo.context.searchHub
+                    }
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <div>
+            <img src="" alt="PAN logo">
+            <a href="#">CUSTOMER SUPPORT</a>
+            <a href="#">LIVE COMMUNITY</a>
+            <a href="#">CASE MANAGEMENT</a>
+            <!-- COVEO->ZURB:  SCAFFOLDING NOTE - I manually added inline-block, otherwise my demo would look odd with the searchbox taking whole width/block; take it away in your CSS. -->
+            <div id="searchbox" style="display:inline-block">
+                <div class="CoveoSearchbox" data-add-search-button="true" data-enable-omnibox="true" data-enable-query-suggest-addon="true"></div>
+                <span class="CoveoAnalytics"></span>
+            </div>
+            <img src="" alt="BELL icon">
+            <img src="" alt="Profile Picture">
+        </div>
+        <div>
+            <div style="float:left">
+                <select>
+                    <option>Quick Actions</option>
+                    <option>New Case</option>
+                    <option>Register a Device</option>
+                    <option>Add a Member</option>
+                    <option>Add a License</option>
+                </select>
+                <div>
+                    <img src="" alt="icon">
+                    Members
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Groups
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Assets
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Tools
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Resources
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Learning Cetner
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Updates
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Knkowledge Base
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    welcome Center
+                </div>
+
+            </div>        
+            <div>
+                <h1>Quick Actions</h1>
+                <div>
+                    <img src="" alt="icon">
+                    Create New Case
+                    <img src="" alt="icon">
+                    Register a...
+                </div>
+                <div>
+                    <h2>Alert</h2>
+                </div>
+                <div>
+                    <div style="float:left">
+                        <h2>Recent Activity</h2>
+                    </div>
+                    <div style="float:left">
+                        <h2>Announcement</h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
