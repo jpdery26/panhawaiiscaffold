@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+        
+    
+        <!--script src="js/CoveoJsSearch.Searchbox.js"></script-->
+        <script src="js/CoveoJsSearch.js"></script>
+        <link rel="stylesheet" href="css/CoveoFullSearchNewDesign.css" />
+        <script>
+            Coveo.context = {
+                organization: 'paloaltonetworkssandbox',
+                token: '2115efeb-7b1c-4fde-a12d-07caa11f522c', //"Live Search Integration",
+                searchHub: 'LiveSearch'
+            }
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                Coveo.SearchEndpoint.configureCloudEndpoint(Coveo.context.organization, Coveo.context.token);
+
+                var root = Coveo.$$(document).find("#searchbox");
+                /*
+                Coveo.initSearchbox(root, ".", {
+                    Searchbox : {
+                        placeholder : "What are you looking for?"
+                    },
+                    Analytics : {
+                        searchHub : Coveo.context.searchHub
+                    }
+                });
+                */
+            });
+        </script>
+
+        <script src="js/templatesNew.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                var root = Coveo.$$(document).find("#search");
+                var mySearchBox = Coveo.$$(document).find(".CoveoSearchbox");
+                //var anaytics = Coveo.$$(document).find(".CoveoAnalytics");
+                /*root.coveo('init', {
+                    externalComponents: [mySearchBox]
+                });
+                */
+                Coveo.init(root, {
+                    //externalComponents: [mySearchBox, anaytics],
+                    externalComponents: [mySearchBox],
+                    Searchbox : {
+                        placeholder : "What are you looking for?"
+                    },
+                    Analytics : {
+                        searchHub : Coveo.context.searchHub
+                    }                    
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <div>
+            <img src="" alt="PAN logo">
+            <a href="#">CUSTOMER SUPPORT</a>
+            <a href="#">LIVE COMMUNITY</a>
+            <a href="#">CASE MANAGEMENT</a>
+            <!-- COVEO->ZURB:  SCAFFOLDING NOTE - I manually added inline-block, otherwise my demo would look odd with the searchbox taking whole width/block; take it away in your CSS. -->
+            <div id="searchbox" style="display:inline-block;min-width: 300px;">
+                <div class="CoveoSearchbox" data-add-search-button="true" data-enable-omnibox="true" data-enable-query-suggest-addon="true"></div>
+                <span class="CoveoAnalytics"></span>
+            </div>
+            <img src="" alt="BELL icon">
+            <img src="" alt="Profile Picture">
+        </div>
+        <div>
+            <div style="float:left">
+                <select>
+                    <option>Quick Actions</option>
+                    <option>New Case</option>
+                    <option>Register a Device</option>
+                    <option>Add a Member</option>
+                    <option>Add a License</option>
+                </select>
+                <div>
+                    <img src="" alt="icon">
+                    Members
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Groups
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Assets
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Tools
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Resources
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Learning Cetner
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Updates
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Knkowledge Base
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    welcome Center
+                </div>
+
+            </div>        
+            <div><!--content-->
+                <div id="search" class='CoveoSearchInterface' data-enable-history="true" data-design="new">
+                <span class="CoveoAnalytics"></span>
+                    <!--
+                    <div class="coveo-tab-section">
+                    <a class="CoveoTab" data-id="All" data-caption="All Content"></a>
+                    </div>
+                    -->
+                    <!--
+                    <div class='coveo-search-section'>
+                    <div class="CoveoSettings"></div>
+                    <div class="CoveoSearchbox" data-enable-omnibox="true"></div>
+                    </div>
+                    -->
+                    <div class="coveo-main-section">
+                    <!-- COVEO->ZURB:  SCAFFOLDING NOTE - I manually added float:right; take it away in your CSS. -->
+
+                    <div class="coveo-facet-column" style="float:right">
+                        <div class="CoveoFacet" data-title="Type" data-field="@objecttype" data-tab="All"></div>
+                        <div class="CoveoFacet" data-title="FileType" data-field="@filetype" data-tab="All"></div>
+                        <div class="CoveoFacet" data-title="Author" data-field="@author" data-tab="All"></div>
+                        <div class="CoveoFacet" data-title="Year" data-field="@year" data-tab="All"></div>
+                        <div class="CoveoFacet" data-title="Month" data-field="@month" data-tab="All"></div>
+                    </div>
+                    <style>
+                        .CoveoResultsPerPage {
+                            float:inherit;
+                        }
+                        /*pager*/
+                        li.coveo-pager-list-item {
+                            display: none; /*hide the numbers*/
+                        }
+                        li.coveo-pager-previous.coveo-pager-anchor.coveo-pager-list-item {
+                            display: inline; /*show "previous" icon*/
+                        }
+                        li.coveo-pager-next.coveo-pager-anchor.coveo-pager-list-item {
+                            display: inline; /*show "previous" icon*/
+                        }
+                    </style>
+                    <div class="coveo-results-column">
+                        <!--
+                        <div class="CoveoShareQuery"></div>
+                        <div class="CoveoExportToExcel"></div>
+                        <div class="CoveoPreferencesPanel">
+                        <div class="CoveoResultsPreferences"></div>
+                        <div class="CoveoResultsFiltersPreferences"></div>
+                        </div>
+                        <div class="CoveoSearchAlerts"></div>
+                        -->
+                        <div class="CoveoBreadcrumb"></div>
+                        <div class="coveo-results-header">
+                            <div class="coveo-sort-section">
+                                <span class="CoveoSort" data-sort-criteria="relevancy" data-caption="Relevance"></span>
+                                <span class="CoveoSort" data-sort-criteria="date descending,date ascending" data-caption="Date"></span>
+                            </div>
+                            <div class="coveo-summary-section">
+                                <div class="CoveoResultsPerPage"></div>
+                                <span class="CoveoQuerySummary"></span>
+                                <div class="CoveoPager"></div>
+                                <!--
+                                <span class="CoveoQueryDuration"></span>
+                                -->
+                            </div>
+                            <!--
+                            <div class="coveo-result-layout-section">
+                                <span class="CoveoResultLayout"></span>
+                            </div>
+                            -->
+                        </div>
+                        <div class="CoveoHiddenQuery"></div>
+                        <div class="CoveoDidYouMean"></div>
+                        <div class="CoveoErrorReport"></div>
+                        <div class="CoveoResultList" data-layout="list" data-wait-animation="fade" data-auto-select-fields-to-include="true"></div>
+                        <!--
+                        <div class="CoveoResultList" data-layout="card" data-wait-animation="fade" data-auto-select-fields-to-include="true"></div>
+                        -->
+                        <div class="CoveoPager"></div>
+                        <div class="CoveoLogo"></div>
+                    </div>
+                    </div>
+                </div>
+            </div><!--content-->
+        </div>
+    </body>
+</html>

@@ -11,14 +11,15 @@
             Coveo.context = {
                 organization: 'paloaltonetworkssandbox',
                 token: '2115efeb-7b1c-4fde-a12d-07caa11f522c', //"Live Search Integration",
-                searchHub: 'LiveSearch'
+                searchHub: 'LiveSearch',
+                searchPageUrl: 'usecase1b.html'
             }
 
             document.addEventListener('DOMContentLoaded', function(){
                 Coveo.SearchEndpoint.configureCloudEndpoint(Coveo.context.organization, Coveo.context.token);
 
                 var root = Coveo.$$(document).find("#searchbox");
-                Coveo.initSearchbox(root, ".", {
+                Coveo.initSearchbox(root, Coveo.context.searchPageUrl, {
                     Searchbox : {
                         placeholder : "What are you looking for?"
                     },
