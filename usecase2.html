@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+        
+        <script src="js/CoveoJsSearch.js"></script>
+        <script src="js/templatesNew.js"></script>
+        <link rel="stylesheet" href="css/CoveoFullSearchNewDesign.css" />
+
+        <script>
+            Coveo.context = {
+                organization: 'paloaltonetworkssandbox',
+                token: '2115efeb-7b1c-4fde-a12d-07caa11f522c', //"Live Search Integration",
+                searchHub: 'LiveSearch'
+            }
+
+            document.addEventListener('DOMContentLoaded', function(){
+                Coveo.SearchEndpoint.configureCloudEndpoint(Coveo.context.organization, Coveo.context.token);
+
+                var root = Coveo.$$(document).find("#searchbox");
+                Coveo.initSearchbox(root, ".", {
+                    Searchbox : {
+                        placeholder : "What are you looking for?"
+                    },
+                    Analytics : {
+                        searchHub : Coveo.context.searchHub
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                var root = Coveo.$$(document).find("#searchHaveYouTried");
+                Coveo.init(root, {
+                    SearchInterface: {
+                        expression: '@syssource==("Lithium - https://live.paloaltonetworks.com/t5/Topics/ct-p/Topics")',
+                        resultsPerPage: 3
+                    }
+                });
+            })
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                var root = Coveo.$$(document).find("#searchRelatedThreads");
+                Coveo.$$(root).on('doneBuildingQuery', function(e, args){
+                    args.queryBuilder.expression.add('@limessagekudoscount>0 @limessageissolution=="True"')
+                });
+                Coveo.init(root, {
+                    SearchInterface: {
+                        expression: '@syssource==("Lithium - https://live.paloaltonetworks.com/t5/Discussions/ct-p/members")',
+                        resultsPerPage: 3
+                    }
+                });
+            })
+        </script>
+    </head>
+
+    <body>
+        <div><!--toprow / header-->
+            <img src="" alt="PAN logo">
+            <a href="#">CUSTOMER SUPPORT</a>
+            <a href="#">LIVE COMMUNITY</a>
+            <a href="#">CASE MANAGEMENT</a>
+            <!-- COVEO->ZURB:  SCAFFOLDING NOTE - I manually added inline-block, otherwise my demo would look odd with the searchbox taking whole width/block; take it away in your CSS. -->
+            <div id="searchbox" style="display:inline-block">
+                <div class="CoveoSearchbox" data-add-search-button="true" data-enable-omnibox="true" data-enable-query-suggest-addon="true"></div>
+                <span class="CoveoAnalytics"></span>
+            </div>
+            <img src="" alt="BELL icon">
+            <img src="" alt="Profile Picture">
+        </div><!--toprow / header-->
+        <div><!--2nd row/content-->
+            <div style="float:left"><!--col1:leftmenu-->
+                <select>
+                    <option>Quick Actions</option>
+                    <option>New Case</option>
+                    <option>Register a Device</option>
+                    <option>Add a Member</option>
+                    <option>Add a License</option>
+                </select>
+                <div>
+                    <img src="" alt="icon">
+                    Members
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Groups
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Assets
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Tools
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Resources
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Learning Cetner
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Updates
+                    <img src="" alt="plus">
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    Knkowledge Base
+                </div>
+                <div>
+                    <img src="" alt="icon">
+                    welcome Center
+                </div>
+
+            </div><!--col1:leftmenu-->     
+            <div style="float:left"><!--col2:content-->
+                <div>
+                    <div>
+                        <h2>Get Started</h2>
+                        <a href="#">Activate My Account</a>
+                        <p>You will need a serail number or...</p>
+                        <h2>No Authorization Code?</h2>
+                        <a href="#">Request Access</a>
+                    </div>
+                    <div>
+                        <h2>
+                            <h3>Panorama Certificate...</h3>
+                            <p>...</p>
+                            <h3>Panorama Certificate...</h3>
+                            <p>...</p>
+                        </h2>
+                    </div>
+                </div>
+                <div >
+                    <h1>I need help with...</h1>
+                    <select id="needhelp-lvl1" style="display:block">
+                        <option>Account Registration</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                    <select id="needhelp-lvl2" style="display:block">
+                        <option>Set up a companyh account</option>
+                        <option>Suboption 2</option>
+                        <option>Suboption 3</option>
+                    </select>
+                </div>
+                <div>
+                    <h4>Have you tried...</h4>
+                    <div id="searchHaveYouTried" class='CoveoSearchInterface' data-enable-history="false" data-design="new">
+                        <span class="CoveoAnalytics"></span>
+                        <div class="coveo-main-section">
+                            <div class="coveo-results-column">
+                                <div class="CoveoResultList" data-layout="card" data-wait-animation="fade" data-auto-select-fields-to-include="false">
+                                    <script id="myCardLithiumThread" type="text/html" class="result-template">
+                                        <div class="coveo-result-frame myCardLithiumThread">
+                                        <div class="coveo-result-row" style="margin-bottom: 20px">
+                                            <!--
+                                            <div class="coveo-result-cell" style="width:32px; vertical-align:middle; flex-grow:0">
+                                            <span class="CoveoIcon" data-small="true" data-with-label="false"></span>
+                                            </div>
+                                            -->
+                                            <div class="coveo-result-cell" style="padding-left: 10px; vertical-align: middle;">
+                                            <a class="CoveoResultLink"></a>
+                                            </div>
+                                        </div>
+                                        <!--
+                                        <div class="coveo-result-row">
+                                            <div class="coveo-result-cell" style="margin-right: 10px">
+                                            <div class="CoveoText" data-value="From" data-weight="bold"></div>
+                                            <span class="CoveoFieldValue" data-field="@authorloginname"></span>
+                                            </div>
+                                            <div class="coveo-result-cell">
+                                            <div class="CoveoText" data-value="To" data-weight="bold"></div>
+                                            <span class="CoveoFieldValue" data-field="@liboardshorttitle"></span>
+                                            </div>
+                                        </div>
+                                        -->
+                                        <div class="coveo-result-row">
+                                            <div class="coveo-result-cell" style="padding-top:5px; padding-bottom:5px">
+                                                <!--
+                                            <div class="CoveoText" data-value="Description" data-weight="bold"></div>
+                                            -->
+                                            <span class="CoveoExcerpt"></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!--
+                                        <div class="coveo-result-row">
+                                            <div class="coveo-result-cell">
+                                            <div class="CoveoText" data-value="Modified" data-weight="bold"></div>
+                                            <div class="CoveoFieldValue" data-field="@date" data-helper="emailDateTime" data-helper-options-always-include-time="true"></div>
+                                            </div>
+                                        </div>
+                                        -->
+                                        <!--
+                                        <div class="CoveoCardActionBar">
+                                            <div class="CoveoQuickview"></div>
+                                            <div class="CoveoCardOverlay" data-title="Details" data-icon="coveo-sprites-main-search-active">
+                                            <table class="CoveoFieldTable" data-allow-minimization="false">
+                                                <tbody>
+                                                <tr data-field="@liboardshorttitle" data-caption="Board">
+                                                </tr>
+                                                <tr data-field="@licategoryshorttitle" data-caption="Category">
+                                                </tr>
+                                                <tr data-field="@limessageauthor" data-caption="Author">
+                                                </tr>
+                                                <tr data-field="@limessagerating" data-caption="Rating">
+                                                </tr>
+                                                <tr data-field="@limessagetags" data-caption="Tags" data-split-values="true">
+                                                </tr>
+                                                <tr data-field="@litopicviewcount" data-caption="View Count">
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                            <div class="CoveoCardOverlay" data-title="Replies" data-icon="coveo-sprites-replies">
+                                            <span class="CoveoResultFolding" data-result-template-id="CardLithiumChildResult"></span>
+                                            </div>
+                                            <div class="CoveoFollowItem"></div>
+                                        </div>
+                                        </div>
+                                        -->
+
+                                    </script>
+                                        
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4>Related LIVE Community Threads</h4>
+                    <div id="searchRelatedThreads" class='CoveoSearchInterface' data-enable-history="false" data-design="new">
+                        <span class="CoveoAnalytics"></span>
+                        <div class="coveo-main-section">
+                            <div class="coveo-results-column">
+                                <div class="CoveoResultList" data-layout="card" data-wait-animation="fade" data-auto-select-fields-to-include="false">
+                                    <script id="myCardLithiumThread" type="text/html" class="result-template">
+                                        <div class="coveo-result-frame myCardLithiumThread">
+                                        <div class="coveo-result-row" style="margin-bottom: 20px">
+                                            <!--
+                                            <div class="coveo-result-cell" style="width:32px; vertical-align:middle; flex-grow:0">
+                                            <span class="CoveoIcon" data-small="true" data-with-label="false"></span>
+                                            </div>
+                                            -->
+                                            <div class="coveo-result-cell" style="padding-left: 10px; vertical-align: middle;">
+                                            <a class="CoveoResultLink"></a>
+                                            </div>
+                                        </div>
+                                        <!--
+                                        <div class="coveo-result-row">
+                                            <div class="coveo-result-cell" style="margin-right: 10px">
+                                            <div class="CoveoText" data-value="From" data-weight="bold"></div>
+                                            <span class="CoveoFieldValue" data-field="@authorloginname"></span>
+                                            </div>
+                                            <div class="coveo-result-cell">
+                                            <div class="CoveoText" data-value="To" data-weight="bold"></div>
+                                            <span class="CoveoFieldValue" data-field="@liboardshorttitle"></span>
+                                            </div>
+                                        </div>
+                                        -->
+                                        <div class="coveo-result-row">
+                                            <div class="coveo-result-cell" style="margin-right: 10px">
+                                                <div class="CoveoText" data-value="Posted on" data-weight="bold"></div>
+                                                <div class="CoveoFieldValue" data-field="@date" data-helper="emailDateTime" data-helper-options-always-include-time="true"></div>
+                                                <div class="CoveoText" data-value="by" data-weight="bold"></div>
+                                                <span class="CoveoFieldValue" data-field="@authorloginname"></span>
+                                            </div>
+                                        </div>
+                                        <div class="coveo-result-row">
+                                            <div class="coveo-result-cell" style="padding-top:5px; padding-bottom:5px">
+                                                <!--
+                                            <div class="CoveoText" data-value="Description" data-weight="bold"></div>
+                                            -->
+                                            <span class="CoveoExcerpt"></span>
+                                            </div>
+                                        </div>
+                                        <!--
+                                        <div class="coveo-result-row">
+                                            <div class="coveo-result-cell">
+                                            <div class="CoveoText" data-value="Modified" data-weight="bold"></div>
+                                            <div class="CoveoFieldValue" data-field="@date" data-helper="emailDateTime" data-helper-options-always-include-time="true"></div>
+                                            </div>
+                                        </div>
+                                        -->
+                                        <div class="coveo-result-row">
+                                            <div class="coveo-result-cell">
+                                                <div class='CoveoTemplateLoader' data-template-id='myCardLithiumThreadKudosIcon' data-condition='raw.limessagekudoscount > 0'></div>
+                                                <div class='CoveoTemplateLoader' data-template-id='myCardLithiumThreadIsSolution' data-condition='raw.limessageissolution==="True"'></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!--
+                                        <div class="CoveoCardActionBar">
+                                            <div class="CoveoQuickview"></div>
+                                            <div class="CoveoCardOverlay" data-title="Details" data-icon="coveo-sprites-main-search-active">
+                                            <table class="CoveoFieldTable" data-allow-minimization="false">
+                                                <tbody>
+                                                <tr data-field="@liboardshorttitle" data-caption="Board">
+                                                </tr>
+                                                <tr data-field="@licategoryshorttitle" data-caption="Category">
+                                                </tr>
+                                                <tr data-field="@limessageauthor" data-caption="Author">
+                                                </tr>
+                                                <tr data-field="@limessagerating" data-caption="Rating">
+                                                </tr>
+                                                <tr data-field="@limessagetags" data-caption="Tags" data-split-values="true">
+                                                </tr>
+                                                <tr data-field="@litopicviewcount" data-caption="View Count">
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                            <div class="CoveoCardOverlay" data-title="Replies" data-icon="coveo-sprites-replies">
+                                            <span class="CoveoResultFolding" data-result-template-id="CardLithiumChildResult"></span>
+                                            </div>
+                                            <div class="CoveoFollowItem"></div>
+                                        </div>
+                                        </div>
+                                        -->
+
+                                    </script>
+                                </div><!--CoveoResultList-->
+                                <script id="myCardLithiumThreadKudosIcon" type="text/html" class="result-template">
+                                    <span class="kudos-icon">kudos-icon</span>
+                                    <div class="CoveoFieldValue" data-field="@limessagekudoscount"></div>
+                                </script>
+                                <script id="myCardLithiumThreadIsSolution" type="text/html" class="result-template">
+                                    <span class="solved-icon">solved-icon</span>
+                                    <div class="CoveoText" data-value="Solved"></div>
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+            </div><!--col2:content-->
+        </div><!--2nd row/content-->
+    </body>
+
+</html>
